@@ -1,0 +1,8 @@
+.back {
+    background-image: url('../assets/back.jpg');
+    background-size: cover;
+}
+
+#inspire {
+    background: none;
+}
