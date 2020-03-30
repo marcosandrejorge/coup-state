@@ -15,17 +15,17 @@ const routes = [
 		name: 'Home',
 		component: Home,
 		beforeEnter: (to, from, next) => {
-			if (getStore.getIsUserNameClear()){
-				next({ name: 'username' })
-			}
-			next()
+			getStore.getIsUserNameClear() ? next({ name: 'username' }) : next()
 		},
 	},
 	{
 		path: '/sala/:hash',
 		name: 'sala',
 		props: true,
-		component: Sala
+		component: Sala,
+		beforeEnter: (to, from, next) => {
+			getStore.getIsUserNameClear() ? next({ name: 'username' }) : next()
+		},
 	},
 	{
 		path: '/username',

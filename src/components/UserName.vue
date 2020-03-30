@@ -29,7 +29,7 @@
                         />
                     </v-card-text>
                     <v-card-actions class="justify-center">
-                        <v-btn color="primary" width="96%" @click="entrarUser()">Entrar</v-btn>
+                        <v-btn color="primary" width="96%" @click="enterUser()">Entrar</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-form>
@@ -60,7 +60,7 @@ import mixinRouter from '@/mixins/mixinRouter'
 
         ...mapActions('user',['setUserName']),
 
-        entrarUser() {
+        enterUser() {
             if (this.verificarUserNameValido()){
                 this.isValidUserName = true
                 this.mensagemErro = ""

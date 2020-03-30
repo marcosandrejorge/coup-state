@@ -5,7 +5,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn text class="d-none d-sm-flex" v-for="button in menus" :key="button.icon">
+        <v-btn text class="d-none d-sm-flex" v-for="button in menus" :key="button.text">
             <span class="pa-2">{{ button.text }}</span>
             <v-icon>{{ button.icon }}</v-icon>
         </v-btn>
