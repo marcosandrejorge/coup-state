@@ -2,15 +2,38 @@
 
     <div class="back">
         <v-app id="inspire">
-            <router-view/>
+
+            <v-app-bar app color="colorBack">
+                
+                <TopBar />
+
+            </v-app-bar>
+
+            <v-content>
+                <v-container fill-height fluit>
+                    <v-flex>
+                        <router-view/>
+                    </v-flex>
+                </v-container>
+            </v-content>
+
+            <v-footer app>
+                <Footer />
+            </v-footer>
         </v-app>
     </div>
     
 </template>
 
 <script>
-
+import TopBar from '@/components/TopBar'
+import Footer from '@/components/Footer'
 export default {
-  name: 'App',
+    name: 'App',
+
+    components: {
+        TopBar,
+        Footer
+    }
 };
 </script>

@@ -3,7 +3,74 @@ export default {
     namespaced: true,
 
     state: {
-        arrSalas: [],
+        arrSalas: [
+            {
+                hash: "swtedvqwe", 
+                isSalaIniciada: false,
+                isBloqueadoJogar: false,
+                jogadorVez: "",
+                arrPessoas: [
+                    {
+                        userName: "Marcos",
+                        isAdmin: true,
+                        qtdMoedas: 2,
+                        isJogando: false,
+                        arrCartas: [
+                            {
+                                carta: 1,
+                                sn_ativa: true
+                            }
+                        ]
+                    }
+                ],
+                arrCartasJogo: [],
+                arrAcoes:[]
+            },
+            {
+                hash: "dfgdfwqerwer",
+                isSalaIniciada: false,
+                isBloqueadoJogar: false,
+                jogadorVez: "",
+                arrPessoas: [
+                    {
+                        userName: "Marcos",
+                        isAdmin: true,
+                        qtdMoedas: 2,
+                        isJogando: false,
+                        arrCartas: [
+                            {
+                                carta: 1,
+                                sn_ativa: true
+                            }
+                        ]
+                    }
+                ],
+                arrCartasJogo: [],
+                arrAcoes: []
+            },
+            {
+                hash: "fsdfwefwef",
+                isSalaIniciada: true,
+                isBloqueadoJogar: false,
+                jogadorVez: "",
+                arrPessoas: [
+                    {
+                        userName: "Marcos",
+                        isAdmin: true,
+                        qtdMoedas: 2,
+                        isJogando: false,
+                        arrCartas: [
+                            {
+                                carta: 1,
+                                sn_ativa: true
+                            }
+                        ]
+                    }
+                ],
+                arrCartasJogo: [],
+                arrAcoes: []
+            }
+        ],
         objSala: {}
     },
 
