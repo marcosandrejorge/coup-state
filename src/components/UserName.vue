@@ -26,6 +26,7 @@
                             dark
                             :hide-details="isValidUserName"
                             :error-messages="mensagemErro"
+                            @keypress.enter="enterUser()"
                         />
                     </v-card-text>
                     <v-card-actions class="justify-center">

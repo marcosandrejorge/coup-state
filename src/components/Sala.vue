@@ -7,7 +7,7 @@
         <Card 
             v-for="(carta, index) in cartas" 
             :key="index" 
-            :carta="carta" 
+            :carta="carta"
         />
 
     </v-row>

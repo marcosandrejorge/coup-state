@@ -2,7 +2,7 @@ import imgDuque from '@/assets/duque.jpg'
 import imgCapitao from '@/assets/capitao.jpg'
 import imgCondesa from '@/assets/condesa.jpg'
 import imgAssassino from '@/assets/assassino.jpg'
-import imgInquisidor from '@/assets/inquisidor.png'
+import imgInquisidor from '@/assets/inquisidor.jpg'
 
 export default [
     {
@@ -37,7 +37,7 @@ export default [
     },
     {
         img: imgInquisidor,
-        nome: "Mago",
+        nome: "Juiz",
         acoes: [
             'Troca uma carta da mão',
             'Vê uma carta do oponente'
