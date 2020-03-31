@@ -6,3 +6,10 @@
 #inspire {
     background: none;
 }
+
+.img-arredondada {
+    border-radius: 50%;
+    background-position: -15px -15px;
+    height: 195px;
+    width: 195px;
+}

@@ -5,7 +5,7 @@ import * as getStore from '@/store/getStore'
 
 const Sala = () => import('@/components/Sala')
 const UserName = () => import('@/components/UserName')
-const Pagina404 = () => import('@/components/Pagina404')
+const Page404 = () => import('@/components/Page404')
 
 Vue.use(VueRouter)
 
@@ -34,7 +34,7 @@ const routes = [
 	},
 	{
 		path: '*',
-		component: Pagina404
+		component: Page404
 	}
 ]
 

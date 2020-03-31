@@ -1,6 +1,6 @@
 <template>
 
-    <div class="back">
+    <div>
         <v-app id="inspire">
 
             <v-app-bar app color="colorBack">
@@ -9,7 +9,7 @@
 
             </v-app-bar>
 
-            <v-content>
+            <v-content class="back">
                 <v-container fill-height fluit>
                     <v-flex>
                         <router-view/>
