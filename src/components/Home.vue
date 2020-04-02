@@ -19,7 +19,15 @@
                     color="colorBack"
                     dark
                 >
-                    <v-toolbar-title>Salas</v-toolbar-title>
+                    <v-toolbar-title>
+                        Salas
+                    </v-toolbar-title>
+
+                    <v-btn color="primary" @click="criarNovaSala()" right absolute>
+                        Nova sala
+                    </v-btn>
+
+                   
                 </v-toolbar>
 
                 <v-list two-line subheader>
@@ -33,6 +41,7 @@
                         <v-list-item
                             v-for="(item, index) in getSalasNaoIniciadas"
                             :key="item.hash"
+                            @click="irParaSala(item.hash)"
                         >
 
                             <v-list-item-avatar>
@@ -54,7 +63,7 @@
                             </v-list-item-content>
 
                             <v-list-item-action>
-                                <v-btn color="primary" @click="irParaSala(item.hash)">
+                                <v-btn color="primary">
                                     <v-icon>keyboard_tab</v-icon>
                                 </v-btn>
                             </v-list-item-action>
@@ -133,6 +142,12 @@ export default {
                     hash
                 }
             });
+        },
+
+        criarNovaSala(){
+            //TODO Chamar socket pra criar nova sala e pega o hash
+            let hash = "rwegrgregeg" //Será o retorno do socket
+            this.irParaSala(hash)
         }
     }
 }

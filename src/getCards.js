@@ -8,6 +8,7 @@ export default [
     {
         img: imgDuque,
         nome: "Rei",
+        sn_ativa: true,
         acoes: [
             'Compra 3 moedas',
             'Bloqueia ajuda externa',
@@ -16,6 +17,7 @@ export default [
     {
         img: imgCapitao,
         nome: "Major",
+        sn_ativa: true,
         acoes: [
             'Rouba 2 moedas',
             'Bloqueia outro major'
@@ -24,6 +26,7 @@ export default [
     {
         img: imgCondesa,
         nome: "Dama",
+        sn_ativa: true,
         acoes: [
             'Defende do matador'
         ]
@@ -31,6 +34,7 @@ export default [
     {
         img: imgAssassino,
         nome: "Matador",
+        sn_ativa: true,
         acoes: [
             'Assassina com 3 moedas'
         ]
@@ -38,6 +42,7 @@ export default [
     {
         img: imgInquisidor,
         nome: "Juiz",
+        sn_ativa: true,
         acoes: [
             'Troca uma carta da mão',
             'Vê uma carta do oponente'

@@ -1,7 +1,10 @@
 <template>
     <v-card>
-        <v-card-title class="justify-center">
-            Ações
+        <v-card-title>
+            Ações realizadas
+            <v-btn color="primary" @click="iniciarPartida()" v-if="isAdminSala" right absolute>
+                Iniciar partida
+            </v-btn>
         </v-card-title>
 
         <v-card-text>
@@ -11,8 +14,8 @@
                 class="overflow-y-auto"
             >
 
-                <template v-for="acao in acoesRealizadas">
-                    <p :key="acao"> {{ acao }} </p>
+                <template v-for="(acao, index) in acoesRealizadas">
+                    <p :key="index"> {{ acao }} </p>
                 </template>
 
             </v-container>
@@ -25,11 +28,11 @@
                     justify="start"
                 >
                     <v-col
-                        v-for="(acao) in acoesPossiveis"
-                        :key="acao"
+                        v-for="(acao, index) in acoesPossiveis"
+                        :key="index"
                         class="shrink pa-1"
                     >
-                        <v-chip :color="acao.color" style="cursor:pointer">
+                        <v-chip :color="acao.color" style="cursor:pointer" @click="executarAcao(acao)">
                             {{ acao.text }}
                         </v-chip>
                     </v-col>
@@ -53,6 +56,22 @@ export default {
 
     data: () => ({
         acoesPossiveis: acoesPossiveis
-    })
+    }),
+
+    computed: {
+        isAdminSala(){
+            return true
+        }
+    },
+
+    methods: {
+        iniciarPartida() {},
+
+        executarAcao(acao) {
+            if (acao.id_acao == 11){
+                this.$emit('escolherCarta');
+            }
+        }
+    }
 }
 </script>
