@@ -2,7 +2,7 @@
     <div>
         <v-row>
 
-            <v-col cols="12" sm="12" md="8" xl="8" style="z-index: 2">
+            <v-col cols="12" sm="12" md="6" xl="8" style="z-index: 2">
 
                 <v-row
                     align-center
@@ -21,16 +21,34 @@
             
             </v-col>
 
-            <v-col cols="12" sm="12" md="8" xl="4">
+            <v-col cols="12" sm="12" md="6" xl="4">
                 
                 <Actions 
-                    :acoesRealizadas="acoesRealizadas"
+                    :acoesRealizadas="getAcoesSala"
                     @escolherCarta="escolherCarta()"
                 />
 
             </v-col>
         </v-row>
 
+        <v-row>
+            <v-col sm="12">
+                <v-row>
+                    <v-col 
+                        cols="12"
+                        sm="12"
+                        md="3"
+                        xl="2"
+                        v-for="(pessoa, index) in getPessoasSala" 
+                        :key="index"
+                    >
+                        <Player
+                            :player="pessoa"
+                        />
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
         <v-overlay
             z-index="1"
             v-if="overlay"
@@ -46,13 +64,23 @@
 
 import Card from '@/components/Card'
 import Actions from '@/components/Actions'
+import Player from '@/components/Player'
 import cards from '@/getCards'
+import { mapGetters } from 'vuex'
 
 export default {
 
+    props: {
+        hash: {
+            type: String,
+            required: true
+        }
+    },
+
     components: {
         Card,
-        Actions
+        Actions,
+        Player
     },
 
     data: ()=> ({
@@ -60,44 +88,25 @@ export default {
         overlay: false,
         zIndex: 0,
 
-        cartas: cards,
-
-        acoesRealizadas: [
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-        ]
+        cartas: cards
     }),
 
+    computed: {
+        ...mapGetters('sala', ['getPessoasSala', 'getAcoesSala'])
+    },
+
     methods: {
+
         escolherCarta() {
             this.overlay = true
         },
 
         selecionarCarta(cartaSelecionada){
+            let selecionou = false;
             this.cartas.map(carta => {
-                if (carta.nome == cartaSelecionada.nome){
+                if (carta.idCarta == cartaSelecionada.idCarta && !selecionou){
                     carta.sn_ativa = false
+                    selecionou = true
                 }
             })
             this.overlay = false

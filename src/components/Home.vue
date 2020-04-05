@@ -57,7 +57,7 @@
                                 </v-list-item-title>
 
                                 <v-list-item-subtitle>
-                                    Jogadores: {{ item.arrPessoas.length }}
+                                    Jogadores: {{ item.quantidadeJogadores }}
                                 </v-list-item-subtitle>
 
                             </v-list-item-content>
@@ -94,7 +94,7 @@
                                 </v-list-item-title>
 
                                 <v-list-item-subtitle>
-                                    Jogadores: {{ item.arrPessoas.length }}
+                                    Jogadores: {{ item.quantidadeJogadores }}
                                 </v-list-item-subtitle>
 
                             </v-list-item-content>

@@ -10,7 +10,7 @@
         <v-card-text>
 
             <v-container
-                style="max-height: 400px"
+                style="height: 400px"
                 class="overflow-y-auto"
             >
 

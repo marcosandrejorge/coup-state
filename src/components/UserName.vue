@@ -10,30 +10,28 @@
             lg="5"
             xl="4"
         >
-            <v-form>
-                <v-card class="elevation-12" color="colorBack pa-3">
-                    <v-card-title class="justify-center">
-                        <p>Seja bem-vindo</p>
-                    </v-card-title>
-                    <v-card-text>
-                        <v-text-field
-                            outlined
-                            v-model="userName"
-                            label="Digite um Username para entrar"
-                            placeholder="Username"
-                            name="username"
-                            type="text"
-                            dark
-                            :hide-details="isValidUserName"
-                            :error-messages="mensagemErro"
-                            @keypress.enter="enterUser()"
-                        />
-                    </v-card-text>
-                    <v-card-actions class="justify-center">
-                        <v-btn color="primary" width="96%" @click="enterUser()">Entrar</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-form>
+            <v-card class="elevation-12" color="colorBack pa-3">
+                <v-card-title class="justify-center">
+                    <p>Seja bem-vindo</p>
+                </v-card-title>
+                <v-card-text>
+                    <v-text-field
+                        outlined
+                        v-model="userName"
+                        label="Digite um Username para entrar"
+                        placeholder="Username"
+                        name="username"
+                        type="text"
+                        dark
+                        :hide-details="isValidUserName"
+                        :error-messages="mensagemErro"
+                        @keypress.enter="enterUser()"
+                    />
+                </v-card-text>
+                <v-card-actions class="justify-center">
+                    <v-btn color="primary" width="96%" @click="enterUser()">Entrar</v-btn>
+                </v-card-actions>
+            </v-card>
         </v-col>
     </v-row>
 </template>

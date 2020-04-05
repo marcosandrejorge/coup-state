@@ -15,7 +15,16 @@ const routes = [
 		name: 'Home',
 		component: Home,
 		beforeEnter: (to, from, next) => {
-			getStore.getIsUserNameClear() ? next({ name: 'username' }) : next()
+			if (getStore.getIsUserNameClear()){
+				next({ name: 'username' })
+			}
+			else {
+				if (!getStore.getIsHashSalaClear()){
+					next({ name: 'sala', params: { hash: getStore.getHashSala() } })
+				} else {
+					next()
+				}
+			}
 		},
 	},
 	{
@@ -24,6 +33,7 @@ const routes = [
 		props: true,
 		component: Sala,
 		beforeEnter: (to, from, next) => {
+			getStore.setHashSala(to.params.hash);
 			getStore.getIsUserNameClear() ? next({ name: 'username' }) : next()
 		},
 	},
