@@ -19,6 +19,15 @@
                 </template>
 
             </v-container>
+
+            <v-row>
+                <v-col class="text-center ma-0">
+                    <v-btn outlined color="yellow">
+                        <v-icon left>attach_money</v-icon> 10
+                    </v-btn>
+                </v-col>
+            </v-row>
+
         </v-card-text>
 
         <v-card-actions>

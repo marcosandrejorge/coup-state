@@ -3,7 +3,7 @@
     <div>
         <v-app id="inspire">
 
-            <v-app-bar app color="colorBack">
+            <v-app-bar app>
                 
                 <TopBar />
 

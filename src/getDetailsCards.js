@@ -68,7 +68,7 @@ export const getActionsCard = (idCarta) => {
             break
         case 2:
             arrAction = [
-                'Rouba 2 moedas',
+                'Pegue 2 moedas',
                 'Bloqueia outro major'
             ]
             break

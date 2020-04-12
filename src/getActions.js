@@ -1,7 +1,7 @@
 export default [
     {
         id_acao: 1,
-        text: 'UMA MOEDA',
+        text: 'RENDA',
         color: 'purple darken-4'
     },
     {
@@ -11,27 +11,27 @@ export default [
     },
     {
         id_acao: 3,
-        text: 'DUQUE',
+        text: 'REI',
         color: 'teal'
     },
     {
         id_acao: 4,
-        text: 'ASSASINO',
+        text: 'ASSASSINAR',
         color: 'indigo darken-4'
     },
     {
         id_acao: 5,
-        text: 'CAPITAO',
+        text: 'EXTORQUIR',
         color: 'deep-purple'
     },
     {
         id_acao: 6,
-        text: 'CONDESA',
+        text: 'DAMA',
         color: 'lime darken-4'
     },
     {
         id_acao: 7,
-        text: 'DUVIDAR',
+        text: 'CONTESTAR',
         color: 'red darken-4'
     },
     {
@@ -46,7 +46,7 @@ export default [
     },
     {
         id_acao: 10,
-        text: 'VER CARTA',
+        text: 'INVESTIGAR',
         color: 'pink darken-1'
     },
     {

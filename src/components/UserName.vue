@@ -10,7 +10,7 @@
             lg="5"
             xl="4"
         >
-            <v-card class="elevation-12" color="colorBack pa-3">
+            <v-card class="elevation-12" color="pa-3">
                 <v-card-title class="justify-center">
                     <p>Seja bem-vindo</p>
                 </v-card-title>

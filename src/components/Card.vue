@@ -89,7 +89,7 @@ export default {
         },
 
         getImgCard() {
-            return (this.carta.sn_ativa && this.isSmall) ? "S" : detailsCard.getImageCard(this.carta.idCarta)
+            return (this.carta.sn_ativa && this.isSmall) ? "?" : detailsCard.getImageCard(this.carta.idCarta)
         },
 
         getNomeCard() {
