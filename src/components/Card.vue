@@ -56,9 +56,12 @@
 
 <script>
 
-import * as detailsCard from '@/getDetailsCards'
+import mixinGetDetailsCards from '@/mixins/mixinGetDetailsCards'
 
 export default {
+    mixins: [
+        mixinGetDetailsCards
+    ],
     props:{
         carta: {
             type: Object,
@@ -84,20 +87,20 @@ export default {
             return !this.carta.sn_ativa && !this.isSmall
         },
 
-        mostrarImgCard(){
+        mostrarImgCard() {
             return (this.carta.sn_ativa && this.isSmall) ? false : true
         },
 
         getImgCard() {
-            return (this.carta.sn_ativa && this.isSmall) ? "?" : detailsCard.getImageCard(this.carta.idCarta)
+            return (this.carta.sn_ativa && this.isSmall) ? "?" : this.mixinGetImageCard(this.carta.idCarta)
         },
 
         getNomeCard() {
-            return (this.carta.sn_ativa && this.isSmall) ? "Segredo" : detailsCard.getNameCard(this.carta.idCarta)
+            return (this.carta.sn_ativa && this.isSmall) ? "Segredo" : this.mixinGetNameCard(this.carta.idCarta)
         },
 
         getActionsCard() {
-            return detailsCard.getActionsCard(this.carta.idCarta)
+            return this.mixinGetActionsCard(this.carta.idCarta)
         },
 
         getColorCard() {
