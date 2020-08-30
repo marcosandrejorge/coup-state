@@ -71,7 +71,7 @@ import { mapGetters } from 'vuex'
 export default {
 
     props: {
-        hash: {
+        hashSala: {
             type: String,
             required: true
         }

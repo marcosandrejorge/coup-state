@@ -26,17 +26,19 @@ export default {
         setUserName(state, username) {
             state.userName = username
         },
-        setHashSala(state, hash) {
-            state.hashSala = hash
-        }
+
+        setHashSala(state, hashSala) {
+            state.hashSala = hashSala
+        },
     },
 
     actions: {
         setUserName({ commit }, payload) {
             commit('setUserName', payload)
         },
+
         setHashSala({ commit }, payload) {
             commit('setHashSala', payload)
-        }
+        },
     }
 }

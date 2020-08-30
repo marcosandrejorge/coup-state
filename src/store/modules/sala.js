@@ -3,25 +3,9 @@ export default {
     namespaced: true,
 
     state: {
-        arrSalas: [
-            {
-                hash: "swtedvqwe",
-                quantidadeJogadores: 4,
-                isSalaIniciada: false,
-            },
-            {
-                hash: "wfwefwefwfwe",
-                quantidadeJogadores: 4,
-                isSalaIniciada: false,
-            },
-            {
-                hash: "wefew53245wegfreg",
-                quantidadeJogadores: 4,
-                isSalaIniciada: true,
-            }
-        ],
+        arrSalas: [],
         objSala: {
-            hash: "swtedvqwe",
+            hashSala: "swtedvqwe",
             isSalaIniciada: false,
             isBloqueadoJogar: false,
             jogadorVez: "",
@@ -166,15 +150,19 @@ export default {
     },
 
     mutations: {
-        setArrSalas(state, arrSalas) {
+
+        SOCKET_salasAtualizadas(state, arrSalas) {
             state.arrSalas = [...arrSalas]
-        }
+        },
     },
 
     actions: {
-        setArrSalas({ commit }, arrSalas) {
-            commit('setArrSalas', arrSalas)
-        }
+        //SOCKET_ é os eventos emitidos pelo servidor
+        //SOCKET_EMIT_ é os eventos emitidos pelo front-end para o servidor.
+
+        SOCKET_salasAtualizadas({ commit }, arrSalas) {
+            commit('SOCKET_salasAtualizadas', arrSalas)
+        },
     }
 
 }

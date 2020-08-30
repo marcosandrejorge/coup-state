@@ -40,8 +40,8 @@
 
                         <v-list-item
                             v-for="(item, index) in getSalasNaoIniciadas"
-                            :key="item.hash"
-                            @click="irParaSala(item.hash)"
+                            :key="item.hashSala"
+                            @click="irParaSala(item.hashSala)"
                         >
 
                             <v-list-item-avatar>
@@ -78,7 +78,7 @@
 
                         <v-list-item
                             v-for="(item, index) in getSalasIniciadas"
-                            :key="item.hash"
+                            :key="item.hashSala"
                         >
 
                             <v-list-item-avatar>
@@ -110,7 +110,7 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import mixinRouter from '@/mixins/mixinRouter'
 
 export default {
@@ -122,8 +122,17 @@ export default {
     data:() => ({
     }),
 
+    //Uma forma de usar o vue socket io
+    // sockets: {
+    //     salasAtualizadas: function(arrSalas) {
+    //         console.log(arrSalas);
+    //     }
+    // },
+
     computed: {
-        ...mapGetters('sala', ['getArrSalas']),
+        ...mapGetters('sala',['getArrSalas']),
+
+        ...mapGetters('user', ['getUserName']),
 
         getSalasIniciadas() {
             return this.getArrSalas.filter(sala => {return sala.isSalaIniciada})
@@ -134,20 +143,33 @@ export default {
         }
     },
 
+    sockets: {
+        //salaConectada é emitida pelo servidor do socket.io
+        salaConectada: function(hashSala) {
+            this.setHashSala(hashSala);
+            this.irParaSala(hashSala);
+        }
+    },
+
     methods: {
-        irParaSala(hash) {
+
+        ...mapActions('sala', ['SOCKET_EMIT_criarSala']),
+
+        ...mapActions('user', ['setHashSala']),
+        
+        irParaSala(hashSala) {
             this.mixinRouterPush({
                 name: 'sala',
                 params: {
-                    hash
+                    hashSala
                 }
             });
         },
 
-        criarNovaSala(){
-            //TODO Chamar socket pra criar nova sala e pega o hash
-            let hash = "rwegrgregeg" //Será o retorno do socket
-            this.irParaSala(hash)
+        criarNovaSala() {
+            this.$socket.emit('criarSala', {
+                username: this.getUserName
+            })
         }
     }
 }

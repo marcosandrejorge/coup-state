@@ -1,9 +1,11 @@
 <template>
     <v-card>
         <v-card-title>
-            Ações realizadas
-            <v-btn color="primary" @click="iniciarPartida()" v-if="isAdminSala" right absolute>
+            <v-btn color="primary" @click="iniciarPartida()" v-if="isAdminSala" left>
                 Iniciar partida
+            </v-btn>
+            <v-btn color="secondary" @click="sairPartida()" right absolute>
+                Sair
             </v-btn>
         </v-card-title>
 
@@ -53,6 +55,8 @@
 
 <script>
 
+import { mapActions } from 'vuex'
+import mixinRouter from '@/mixins/mixinRouter'
 import acoesPossiveis from '@/getActions'
 export default {
 
@@ -62,6 +66,10 @@ export default {
             required: true
         }
     },
+
+    mixins: [
+        mixinRouter
+    ],
 
     data: () => ({
         acoesPossiveis: acoesPossiveis
@@ -74,7 +82,19 @@ export default {
     },
 
     methods: {
+
+        ...mapActions('user', ['setHashSala']),
+
         iniciarPartida() {},
+
+        sairPartida() {
+            this.$socket.emit('sairSala')
+            this.setHashSala('')
+
+            this.mixinRouterPush({
+                name: 'Home'
+            });
+        },
 
         executarAcao(acao) {
             if (acao.id_acao == 11){
