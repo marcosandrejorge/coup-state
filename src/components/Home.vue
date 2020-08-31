@@ -41,7 +41,7 @@
                         <v-list-item
                             v-for="(item, index) in getSalasNaoIniciadas"
                             :key="item.hashSala"
-                            @click="irParaSala(item.hashSala)"
+                            @click="entrarSala(item.hashSala)"
                         >
 
                             <v-list-item-avatar>
@@ -145,9 +145,8 @@ export default {
 
     sockets: {
         //salaConectada é emitida pelo servidor do socket.io
-        salaConectada: function(hashSala) {
-            this.setHashSala(hashSala);
-            this.irParaSala(hashSala);
+        salaConectada: function(objSala) {
+            this.irParaSala(objSala.hashSala);
         }
     },
 
@@ -164,6 +163,13 @@ export default {
                     hashSala
                 }
             });
+        },
+
+        entrarSala(hashSala) {
+            this.$socket.emit('entrarSala', {
+                username: this.getUserName,
+                hashSala: hashSala
+            })
         },
 
         criarNovaSala() {

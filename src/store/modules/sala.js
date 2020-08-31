@@ -3,156 +3,90 @@ export default {
     namespaced: true,
 
     state: {
-        arrSalas: [],
+
         objSala: {
-            hashSala: "swtedvqwe",
+            hashSala: "",
             isSalaIniciada: false,
-            isBloqueadoJogar: false,
-            jogadorVez: "",
-            arrPessoas: [
-                {
-                    userName: "Jorge",
-                    isAdmin: true,
-                    qtdMoedas: 2,
-                    isJogando: false,
-                    arrCartas: [
-                        {
-                            idCarta: 1,
-                            sn_ativa: false
-                        },
-                        {
-                            idCarta: 2,
-                            sn_ativa: true
-                        }
-                    ]
-                },
-                {
-                    userName: "André",
-                    isAdmin: false,
-                    qtdMoedas: 10,
-                    isJogando: false,
-                    arrCartas: [
-                        {
-                            idCarta: 3,
-                            sn_ativa: true
-                        },
-                        {
-                            idCarta: 4,
-                            sn_ativa: false
-                        }
-                    ]
-                },
-                {
-                    userName: "Todesco",
-                    isAdmin: false,
-                    qtdMoedas: 7,
-                    isJogando: false,
-                    arrCartas: [
-                        {
-                            idCarta: 5,
-                            sn_ativa: true
-                        },
-                        {
-                            idCarta: 5,
-                            sn_ativa: false
-                        }
-                    ]
-                },
-                {
-                    userName: "Romulo",
-                    isAdmin: false,
-                    qtdMoedas: 0,
-                    isJogando: false,
-                    arrCartas: [
-                        {
-                            idCarta: 4,
-                            sn_ativa: false
-                        },
-                        {
-                            idCarta: 1,
-                            sn_ativa: false
-                        }
-                    ]
-                },
-                {
-                    userName: "Piske",
-                    isAdmin: false,
-                    qtdMoedas: 2,
-                    isJogando: false,
-                    arrCartas: [
-                        {
-                            idCarta: 2,
-                            sn_ativa: true
-                        },
-                        {
-                            idCarta: 2,
-                            sn_ativa: true
-                        }
-                    ]
-                },
-                {
-                    userName: "Rovela",
-                    isAdmin: false,
-                    qtdMoedas: 2,
-                    isJogando: false,
-                    arrCartas: [
-                        {
-                            idCarta: 2,
-                            sn_ativa: true
-                        },
-                        {
-                            idCarta: 2,
-                            sn_ativa: true
-                        }
-                    ]
-                }
-            ],
-            arrCartasJogo: [],
-            arrAcoes: [
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-                'Jogador Marcos comprou 1 moeda',
-                'Jogador Pedro comprou 3 moedas',
-            ]
-        }
+            quantidadeJogadores: 0,
+            admin: "",
+            adminUserName: ""
+        },
+
+        arrSalas: [],
+
+        arrJogadoresSala: [],
+
+        //TODO PRA CIMA JÁ ESTÁ OK, FALTA OS DEBAIXO
+
+        arrAcoesSala: [
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+            'Jogador Marcos comprou 1 moeda',
+            'Jogador Pedro comprou 3 moedas',
+        ],
+
+        arrCartasJogo: [
+            {
+                idCarta: 1,
+                sn_ativa: false,
+                idJogador: ""
+            },
+            {
+                idCarta: 1,
+                sn_ativa: false,
+                idJogador: ""
+            }
+        ]
     },
 
     getters: {
         getArrSalas(state) {
             return state.arrSalas
         },
-        getPessoasSala(state) {
-            return state.objSala.arrPessoas
-        },
-        getAcoesSala(state) {
-            return state.objSala.arrAcoes
+
+        arrJogadoresSala(state) {
+            return state.arrJogadoresSala
         },
 
+        getAcoesSala(state) {
+            return state.arrAcoesSala
+        },
+
+        getObjSala(state) {
+            return state.objSala
+        }
     },
 
     mutations: {
-
         SOCKET_salasAtualizadas(state, arrSalas) {
             state.arrSalas = [...arrSalas]
+        },
+
+        SOCKET_salaConectada(state, objSala) {
+            state.objSala = { ...objSala}
+        },
+
+        SOCKET_jogadoresAtualizado(state, arrJogadores) {
+            state.arrJogadoresSala = [...arrJogadores]
         },
     },
 
@@ -162,6 +96,14 @@ export default {
 
         SOCKET_salasAtualizadas({ commit }, arrSalas) {
             commit('SOCKET_salasAtualizadas', arrSalas)
+        },
+
+        SOCKET_salaConectada({ commit }, payload) {
+            commit('SOCKET_salaConectada', payload)
+        },
+
+        SOCKET_jogadoresAtualizado({ commit }, payload) {
+            commit('SOCKET_jogadoresAtualizado', payload)
         },
     }
 

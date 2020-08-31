@@ -11,12 +11,9 @@ const vueSocket = new VueSocketIO({
   vuex: {
     store,
     //O nome o evento emitido no servidor é "salasAtualizadas", no store, o mutation será SOCKET_salasAtualizadas
-    mutationPrefix: 'SOCKET_'
+    actionPrefix: 'SOCKET_'
   }
 });
-
-//Seta o socket.io no store para poder emitir os eventos pela vuex.
-store.commit('setSocket', vueSocket.io);
 
 Vue.config.productionTip = false
 

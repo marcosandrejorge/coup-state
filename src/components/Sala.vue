@@ -39,7 +39,7 @@
                         sm="12"
                         md="3"
                         xl="2"
-                        v-for="(pessoa, index) in getPessoasSala" 
+                        v-for="(pessoa, index) in getJogadoresContra" 
                         :key="index"
                     >
                         <Player
@@ -92,7 +92,14 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('sala', ['getPessoasSala', 'getAcoesSala'])
+        ...mapGetters('sala', ['arrJogadoresSala', 'getAcoesSala']),
+        ...mapGetters('user', ['getSocketId']),
+
+        getJogadoresContra() {
+            return this.arrJogadoresSala.filter(jogador => {
+                return jogador.idJogador != this.getSocketId
+            })
+        }
     },
 
     methods: {
