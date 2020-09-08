@@ -73,6 +73,10 @@ export default {
 
         getObjSala(state) {
             return state.objSala
+        },
+
+        getIsSalaIniciada(state) {
+            return state.objSala.isSalaIniciada
         }
     },
 

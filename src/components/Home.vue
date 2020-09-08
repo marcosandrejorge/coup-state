@@ -41,7 +41,7 @@
                         <v-list-item
                             v-for="(item, index) in getSalasNaoIniciadas"
                             :key="item.hashSala"
-                            @click="entrarSala(item.hashSala)"
+                            @click="irParaSala(item.hashSala)"
                         >
 
                             <v-list-item-avatar>
@@ -110,7 +110,7 @@
 
 <script>
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import mixinRouter from '@/mixins/mixinRouter'
 
 export default {
@@ -131,7 +131,6 @@ export default {
 
     computed: {
         ...mapGetters('sala',['getArrSalas']),
-
         ...mapGetters('user', ['getUserName']),
 
         getSalasIniciadas() {
@@ -144,18 +143,13 @@ export default {
     },
 
     sockets: {
-        //salaConectada é emitida pelo servidor do socket.io
-        salaConectada: function(objSala) {
-            this.irParaSala(objSala.hashSala);
+        //salaCriada é emitida pelo servidor do socket.io quando a sala que o usuário criou está ok para ele entrar.
+        salaCriada: function(hashSala) {
+            this.irParaSala(hashSala);
         }
     },
 
-    methods: {
-
-        ...mapActions('sala', ['SOCKET_EMIT_criarSala']),
-
-        ...mapActions('user', ['setHashSala']),
-        
+    methods: {        
         irParaSala(hashSala) {
             this.mixinRouterPush({
                 name: 'sala',
@@ -165,16 +159,10 @@ export default {
             });
         },
 
-        entrarSala(hashSala) {
-            this.$socket.emit('entrarSala', {
-                username: this.getUserName,
-                hashSala: hashSala
-            })
-        },
-
         criarNovaSala() {
+            //Irá criar a sala e só redirecionará para a sala na função salaCriada
             this.$socket.emit('criarSala', {
-                username: this.getUserName
+                username: this.getUserName,
             })
         }
     }

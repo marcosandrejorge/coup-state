@@ -4,7 +4,7 @@
         hover
     >
         <v-card-title class="justify-center">
-            {{ player.userName }}
+            {{ player.username }}
         </v-card-title>
 
         <v-card-text class="text-center">

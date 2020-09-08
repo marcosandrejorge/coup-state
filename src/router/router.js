@@ -15,10 +15,13 @@ const routes = [
 		name: 'Home',
 		component: Home,
 		beforeEnter: (to, from, next) => {
+			//Se o usuario não inseriu o username, redireciona ele para a tela para inserir
 			if (getStore.getIsUserNameClear()){
 				next({ name: 'username' })
 			}
 			else {
+				//Se o usuário já inseriu o username e tem o hashSala na vuex, 
+				//quer dizer que ele veio atraves do link de convite da sala, logo, redireciona o mesmo para a sala
 				if (!getStore.getIsHashSalaClear()) {
 					next({ name: 'sala', params: { hashSala: getStore.getHashSala() } })
 				} else {
@@ -33,7 +36,9 @@ const routes = [
 		props: true,
 		component: Sala,
 		beforeEnter: (to, from, next) => {
+			//Seta o hash da sala na vuex, para que caso o usuario esteja vindo do link de convite deixe salvo o hash para redirecionar depois de inserir o username.
 			getStore.setHashSala(to.params.hashSala);
+			//Caso não tenha o username inserido, redireciona pra pagina pra inserir
 			getStore.getIsUserNameClear() ? next({ name: 'username' }) : next()
 		},
 	},

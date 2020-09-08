@@ -7,8 +7,8 @@
                 <v-row
                     align-center
                     justify="center"
+                    v-if="getIsSalaIniciada"
                 >
-
                     <Card
                         v-for="(carta, index) in cartas"
                         :key="index" 
@@ -18,6 +18,22 @@
                     />
 
                 </v-row>
+
+                <v-row
+                    align-center
+                    justify="center"
+                    v-if="!getIsSalaIniciada"
+                >
+                    
+                    <div>
+                        <v-alert
+                            color="primary"
+                            elevation="1"
+                        >
+                            Aguarde a partida começar.
+                        </v-alert>
+                    </div>
+                </v-row>
             
             </v-col>
 
@@ -26,6 +42,8 @@
                 <Actions 
                     :acoesRealizadas="getAcoesSala"
                     @escolherCarta="escolherCarta()"
+                    @sairPartida="sairPartida()"
+                    @iniciarPartida="iniciarPartida()"
                 />
 
             </v-col>
@@ -66,7 +84,9 @@ import Card from '@/components/Card'
 import Actions from '@/components/Actions'
 import Player from '@/components/Player'
 import cards from '@/getCards'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import mixinRouter from '@/mixins/mixinRouter'
+
 
 export default {
 
@@ -76,6 +96,10 @@ export default {
             required: true
         }
     },
+
+    mixins: [
+        mixinRouter
+    ],
 
     components: {
         Card,
@@ -92,8 +116,8 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('sala', ['arrJogadoresSala', 'getAcoesSala']),
-        ...mapGetters('user', ['getSocketId']),
+        ...mapGetters('sala', ['arrJogadoresSala', 'getAcoesSala', 'getIsSalaIniciada']),
+        ...mapGetters('user', ['getSocketId', 'getUserName']),
 
         getJogadoresContra() {
             return this.arrJogadoresSala.filter(jogador => {
@@ -102,7 +126,21 @@ export default {
         }
     },
 
+    sockets: {
+        mensagem(objMensagem) {
+            alert(objMensagem.mensagem)
+            if (objMensagem.tipo == 'redirect') {
+                this.setHashSala('');
+                this.mixinRouterPush({
+                    name: 'Home'
+                });
+            }
+        }
+    },
+
     methods: {
+
+        ...mapActions('user', ['setHashSala']),
 
         escolherCarta() {
             this.overlay = true
@@ -117,7 +155,32 @@ export default {
                 }
             })
             this.overlay = false
+        },
+
+        sairPartida() {
+            this.$socket.emit('sairSala')
+            this.setHashSala('')
+
+            this.mixinRouterPush({
+                name: 'Home'
+            });
+        },
+
+        //Entra na sala do hash que foi passado como parametro.
+        entrarSala() {
+            this.$socket.emit('entrarSala', {
+                username: this.getUserName,
+                hashSala: this.hashSala
+            })
+        },
+
+        iniciarPartida() {
+            this.$socket.emit('iniciarPartida')
         }
+    },
+
+    created() {
+        this.entrarSala()
     }
 }
 </script>

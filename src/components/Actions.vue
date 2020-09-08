@@ -55,9 +55,8 @@
 
 <script>
 
-import { mapActions } from 'vuex'
-import mixinRouter from '@/mixins/mixinRouter'
 import acoesPossiveis from '@/getActions'
+import { mapGetters } from 'vuex'
 export default {
 
     props: {
@@ -67,33 +66,30 @@ export default {
         }
     },
 
-    mixins: [
-        mixinRouter
-    ],
-
     data: () => ({
         acoesPossiveis: acoesPossiveis
     }),
 
     computed: {
+
+        ...mapGetters('sala', ['getObjSala']),
+        ...mapGetters('user', ['getSocketId']),
+
         isAdminSala(){
-            return true
+            return this.getObjSala.admin == this.getSocketId
         }
     },
 
     methods: {
 
-        ...mapActions('user', ['setHashSala']),
-
-        iniciarPartida() {},
+        iniciarPartida() {
+            if (this.isAdminSala) {
+                this.$emit('iniciarPartida');
+            }
+        },
 
         sairPartida() {
-            this.$socket.emit('sairSala')
-            this.setHashSala('')
-
-            this.mixinRouterPush({
-                name: 'Home'
-            });
+            this.$emit('sairPartida');
         },
 
         executarAcao(acao) {
