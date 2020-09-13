@@ -16,46 +16,9 @@ export default {
 
         arrJogadoresSala: [],
 
-        //TODO PRA CIMA JÁ ESTÁ OK, FALTA OS DEBAIXO
+        arrMinhasCartas: [],
 
-        arrAcoesSala: [
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-            'Jogador Marcos comprou 1 moeda',
-            'Jogador Pedro comprou 3 moedas',
-        ],
-
-        arrCartasJogo: [
-            {
-                idCarta: 1,
-                sn_ativa: false,
-                idJogador: ""
-            },
-            {
-                idCarta: 1,
-                sn_ativa: false,
-                idJogador: ""
-            }
-        ]
+        arrAcoesSala: []
     },
 
     getters: {
@@ -77,6 +40,10 @@ export default {
 
         getIsSalaIniciada(state) {
             return state.objSala.isSalaIniciada
+        },
+
+        getMinhasCartas(state) {
+            return state.arrMinhasCartas
         }
     },
 
@@ -91,6 +58,14 @@ export default {
 
         SOCKET_jogadoresAtualizado(state, arrJogadores) {
             state.arrJogadoresSala = [...arrJogadores]
+        },
+
+        SOCKET_minhasCartas(state, arrCartas) {
+            state.arrMinhasCartas = [...arrCartas]
+        },
+
+        SOCKET_acoesSala(state, arrAcoes) {
+            state.arrAcoesSala = [...arrAcoes]
         },
     },
 
@@ -108,6 +83,14 @@ export default {
 
         SOCKET_jogadoresAtualizado({ commit }, payload) {
             commit('SOCKET_jogadoresAtualizado', payload)
+        },
+
+        SOCKET_minhasCartas({ commit }, payload) {
+            commit('SOCKET_minhasCartas', payload)
+        },
+
+        SOCKET_acoesSala({ commit }, payload) {
+            commit('SOCKET_acoesSala', payload)
         },
     }
 

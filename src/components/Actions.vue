@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title>
-            <v-btn color="primary" @click="iniciarPartida()" v-if="isAdminSala" left>
+            <v-btn color="primary" @click="iniciarPartida()" v-if="isAdminSala && !isSalaIniciada" left>
                 Iniciar partida
             </v-btn>
             <v-btn color="secondary" @click="sairPartida()" right absolute>
@@ -77,6 +77,10 @@ export default {
 
         isAdminSala(){
             return this.getObjSala.admin == this.getSocketId
+        },
+
+        isSalaIniciada() {
+            return this.getObjSala.isSalaIniciada;
         }
     },
 

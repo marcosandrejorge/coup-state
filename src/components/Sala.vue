@@ -10,10 +10,9 @@
                     v-if="getIsSalaIniciada"
                 >
                     <Card
-                        v-for="(carta, index) in cartas"
+                        v-for="(carta, index) in getMinhasCartas"
                         :key="index" 
                         :carta="carta"
-                        v-show="index > 2"
                         @selecionarCarta="selecionarCarta($event)"
                     />
 
@@ -83,7 +82,6 @@
 import Card from '@/components/Card'
 import Actions from '@/components/Actions'
 import Player from '@/components/Player'
-import cards from '@/getCards'
 import { mapGetters, mapActions } from 'vuex'
 import mixinRouter from '@/mixins/mixinRouter'
 
@@ -110,13 +108,11 @@ export default {
     data: ()=> ({
 
         overlay: false,
-        zIndex: 0,
-
-        cartas: cards
+        zIndex: 0
     }),
 
     computed: {
-        ...mapGetters('sala', ['arrJogadoresSala', 'getAcoesSala', 'getIsSalaIniciada']),
+        ...mapGetters('sala', ['arrJogadoresSala', 'getAcoesSala', 'getIsSalaIniciada', 'getMinhasCartas']),
         ...mapGetters('user', ['getSocketId', 'getUserName']),
 
         getJogadoresContra() {
@@ -148,7 +144,7 @@ export default {
 
         selecionarCarta(cartaSelecionada){
             let selecionou = false;
-            this.cartas.map(carta => {
+            this.getMinhasCartas.map(carta => {
                 if (carta.idCarta == cartaSelecionada.idCarta && !selecionou){
                     carta.sn_ativa = false
                     selecionou = true
