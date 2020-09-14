@@ -38,7 +38,7 @@
 
             <v-col cols="12" sm="12" md="6" xl="4">
                 
-                <Actions 
+                <Actions
                     :acoesRealizadas="getAcoesSala"
                     @escolherCarta="escolherCarta()"
                     @sairPartida="sairPartida()"
@@ -74,6 +74,8 @@
         >
 
         </v-overlay>
+
+        <ModalAcoes />
     </div>
 </template>
 
@@ -82,6 +84,7 @@
 import Card from '@/components/Card'
 import Actions from '@/components/Actions'
 import Player from '@/components/Player'
+import ModalAcoes from '@/components/ModalAcoes'
 import { mapGetters, mapActions } from 'vuex'
 import mixinRouter from '@/mixins/mixinRouter'
 
@@ -102,7 +105,8 @@ export default {
     components: {
         Card,
         Actions,
-        Player
+        Player,
+        ModalAcoes
     },
 
     data: ()=> ({

@@ -64,7 +64,7 @@ export default {
             switch (idCarta) {
                 case 1:
                     arrAction = [
-                        'Compra 3 moedas',
+                        'Recebe 3 moedas',
                         'Bloqueia ajuda externa',
                     ]
                     break

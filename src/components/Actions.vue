@@ -31,31 +31,11 @@
             </v-row>
 
         </v-card-text>
-
-        <v-card-actions>
-            <v-card-actions>
-                <v-row
-                    align="center"
-                    justify="start"
-                >
-                    <v-col
-                        v-for="(acao, index) in acoesPossiveis"
-                        :key="index"
-                        class="shrink pa-1"
-                    >
-                        <v-chip :color="acao.color" style="cursor:pointer" @click="executarAcao(acao)">
-                            {{ acao.text }}
-                        </v-chip>
-                    </v-col>
-                </v-row>
-            </v-card-actions>
-        </v-card-actions>
     </v-card>
 </template>
 
 <script>
 
-import acoesPossiveis from '@/getActions'
 import { mapGetters } from 'vuex'
 export default {
 
@@ -67,7 +47,6 @@ export default {
     },
 
     data: () => ({
-        acoesPossiveis: acoesPossiveis
     }),
 
     computed: {

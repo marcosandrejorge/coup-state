@@ -2,7 +2,7 @@ export default [
     {
         idCarta: 1,
         sn_ativa: false,
-        texto: "Rei: Recebe 3 moedas.",
+        texto: "TAXA: Recebe 3 moedas.",
         observacao: "Não pode ser bloqueado, mas pode ser contestado.",
         texto2: null,
         observacao2: null,
@@ -18,7 +18,7 @@ export default [
     {
         idCarta: 3,
         sn_ativa: false,
-        texto: "Dama: Bloqueia o Matador.",
+        texto: "DEFENDER: Bloqueia o Matador.",
         observacao: "Não pode ser bloqueado, mas pode ser contestada.",
         texto2: null,
         observacao2: null,

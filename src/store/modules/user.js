@@ -14,8 +14,7 @@ export default {
             idJogador: "",
             userName: "",
             qtdMoedas: 0,
-            isJogando: false,
-            isBloqueadoJogar: true
+            isJogando: false
         }
     },
 

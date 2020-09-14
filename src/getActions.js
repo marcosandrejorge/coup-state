@@ -11,7 +11,7 @@ export default [
     },
     {
         id_acao: 3,
-        text: 'REI',
+        text: 'TAXA',
         color: 'teal'
     },
     {
@@ -26,7 +26,7 @@ export default [
     },
     {
         id_acao: 6,
-        text: 'DAMA',
+        text: 'DEFENDER',
         color: 'lime darken-4'
     },
     {
