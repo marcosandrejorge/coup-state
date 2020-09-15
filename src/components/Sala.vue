@@ -75,7 +75,9 @@
 
         </v-overlay>
 
-        <ModalAcoes />
+        <ModalAcoes 
+            @acaoEscolhida="acaoRealizar($event)"
+        />
     </div>
 </template>
 
@@ -176,6 +178,14 @@ export default {
 
         iniciarPartida() {
             this.$socket.emit('iniciarPartida')
+        },
+
+        acaoRealizar(objAcao) {
+            this.$socket.emit('acaoRealizar', {
+                idAcao: objAcao.idAcao,
+                idJogadorAtacado: objAcao.idJogadorAtacado,
+                numeroCartaEscolhida: objAcao.numeroCartaEscolhida
+            })
         }
     },
 
