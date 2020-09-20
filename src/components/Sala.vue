@@ -77,6 +77,7 @@
 
         <ModalAcoes 
             @acaoEscolhida="acaoRealizar($event)"
+            @acaoDefesaEscolhida="acaoDefesaRealizar($event)"
         />
     </div>
 </template>
@@ -184,7 +185,18 @@ export default {
             this.$socket.emit('acaoRealizar', {
                 idAcao: objAcao.idAcao,
                 idJogadorAtacado: objAcao.idJogadorAtacado,
-                numeroCartaEscolhida: objAcao.numeroCartaEscolhida
+                usernameJogadorAtacado: objAcao.usernameJogadorAtacado,
+                numeroCartaEscolhida: objAcao.numeroCartaEscolhida,
+                usernameQuemJogou: this.getUserName
+            })
+        },
+
+        acaoDefesaRealizar(objAcao) {
+            this.$socket.emit('acaoDefesaRealizar', {
+                idAcao: objAcao.idAcao,
+                idJogadorDefendido: objAcao.idJogadorDefendido,
+                usernameJogadorDefendido: objAcao.usernameJogadorDefendido,
+                usernameQuemJogou: this.getUserName
             })
         }
     },
