@@ -21,7 +21,7 @@
     background: #2f3136;
 }
 
-.back {
+body {
     background-image: url('../assets/back.jpg');
     background-size: cover;
 }

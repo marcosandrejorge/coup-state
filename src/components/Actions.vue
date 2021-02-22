@@ -24,8 +24,9 @@
 
             <v-row>
                 <v-col class="text-center ma-0">
-                    <v-btn outlined color="yellow">
-                        <v-icon left>attach_money</v-icon> 10
+                    Suas moedas
+                    <v-btn  class="ml-5" outlined color="yellow">
+                        <v-icon left>attach_money</v-icon> {{ getMoedasJogadorLogado }}
                     </v-btn>
                 </v-col>
             </v-row>
@@ -52,7 +53,7 @@ export default {
     computed: {
 
         ...mapGetters('sala', ['getObjSala']),
-        ...mapGetters('user', ['getSocketId']),
+        ...mapGetters('user', ['getSocketId', 'getMoedasJogadorLogado']),
 
         isAdminSala(){
             return this.getObjSala.admin == this.getSocketId

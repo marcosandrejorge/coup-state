@@ -33,6 +33,9 @@ export default {
         },
         getIsHashSalaClear(state) {
             return state.hashSala == "" || state.hashSala == null
+        },
+        getMoedasJogadorLogado(state) {
+            return state.objJogadorLogado.qtdMoedas;
         }
     },
 
