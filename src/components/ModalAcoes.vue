@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <!--Modal de ações de ataque-->
-    <v-dialog v-model="mostrarModalAcaoAtaque" persistent max-width="290" overlay-opacity="0.7">
+    <v-dialog v-model="mostrarModalAcaoAtaque" v-if="getIsSalaIniciada" persistent max-width="400" overlay-opacity="0.7">
       <v-card>
         <v-card-title class="headline">Sua vez de jogar</v-card-title>
         <v-card-text>Você tem {{ segundosJogar }} segundos para jogar</v-card-text>
@@ -27,7 +27,7 @@
     </v-dialog>
 
     <!--Modal de mostrar os jodadores para selecionar-->
-    <v-dialog scrollable  v-model="mostrarModalJogadores" persistent max-width="320px">
+    <v-dialog scrollable  v-model="mostrarModalJogadores" v-if="getIsSalaIniciada" persistent max-width="320px">
 
       <v-card>
         <v-card-title class="headline">Selecione o jogador que receberá a ação</v-card-title>
@@ -64,10 +64,10 @@
 
 
     <!--Modal de ações de defesa-->
-    <v-dialog v-model="mostrarModalAcaoDefesa" persistent max-width="290" overlay-opacity="0.7">
+    <v-dialog v-model="mostrarModalAcaoDefesa" v-if="getIsSalaIniciada" persistent max-width="400" overlay-opacity="0.7">
       <v-card>
-        <v-card-title class="headline">{{titleDefesa}}</v-card-title>
-        <v-card-text>{{descricaoAcaoSofrida}}</v-card-text>
+        <v-card-title class="headline">{{tituloAcao}}</v-card-title>
+        <v-card-text>{{descricaoAcao}}</v-card-text>
         <v-card-text>Você tem {{ segundosJogar }} segundos para jogar</v-card-text>
         <v-card-actions>
             <v-card-actions>
@@ -81,6 +81,34 @@
                         class="shrink pa-1"
                     >
                         <v-chip :color="acao.color" style="cursor:pointer" @click="executarAcaoDefesa(acao.id_acao)">
+                            {{ acao.text }}
+                        </v-chip>
+                    </v-col>
+                </v-row>
+            </v-card-actions>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+
+    <!--Modal de resposta de jogada-->
+    <v-dialog v-model="mostrarModalResponderJogada" v-if="getIsSalaIniciada" persistent max-width="400" overlay-opacity="0.7">
+      <v-card>
+        <v-card-title class="headline">{{tituloAcao}}</v-card-title>
+        <v-card-text>{{descricaoAcao}}</v-card-text>
+        <v-card-text>Você tem {{ segundosJogar }} segundos para jogar</v-card-text>
+        <v-card-actions>
+            <v-card-actions>
+                <v-row
+                    align="center"
+                    justify="start"
+                >
+                    <v-col
+                        v-for="(acao, index) in getAcoesRespostaJogada"
+                        :key="index"
+                        class="shrink pa-1"
+                    >
+                        <v-chip :color="acao.color" style="cursor:pointer" @click="verificarAcaoEscolhida(acao.id_acao)">
                             {{ acao.text }}
                         </v-chip>
                     </v-col>
@@ -105,6 +133,7 @@ export default {
         segundosJogar: 10,
         mostrarModalAcaoAtaque: false,
         mostrarModalAcaoDefesa: false,
+        mostrarModalResponderJogada: false,
         mostrarModalJogadores: false,
         usernameJogadorAtacado: null,
         acoesPossiveis: acoesPossiveis,
@@ -112,35 +141,56 @@ export default {
         numeroCartaEscolhida: null,
         idJogadorAtacado: null,
         idAcao: null,
-        titleDefesa: "",
-        descricaoAcaoSofrida: "",
+        tituloAcao: "",
+        descricaoAcao: "",
         idJogadorQueAtacou: null,
         usernameQueAtacou: null,
-        isEsconderAcaoDefender: false
+        mostrarAcaoDefesa: false
     }),
 
     computed: {
-        ...mapGetters('sala', ['arrJogadoresSala']),
-        ...mapGetters('user', ['getSocketId']),
+        ...mapGetters('sala', ['getArrJogadoresSala', 'getIsSalaIniciada']),
+        ...mapGetters('user', ['getSocketId', 'getMoedasJogadorLogado']),
 
         getJogadoresContra() {
-            return this.arrJogadoresSala.filter(jogador => {
+            return this.getArrJogadoresSala.filter(jogador => {
                 return jogador.idJogador != this.getSocketId && jogador.isJogando
             })
         },
 
         getAcoesDeAtaque() {
-            return acoesPossiveis.filter(acao => !acao.is_acao_defesa);
+            return acoesPossiveis.filter(acao => {
+                return !acao.is_acao_defesa && 
+                (
+                    (acao.id_acao != 4 && acao.id_acao != 8) ||
+                    (
+                        (
+                            acao.id_acao == 4 && 
+                            this.getMoedasJogadorLogado >= 3
+                        ) ||
+                        ( 
+                            acao.id_acao == 8 &&
+                            this.getMoedasJogadorLogado >= 7
+                        )
+                    )
+                )
+            });
         },
 
         getAcoesDefesa() {
             return acoesPossiveis.filter(acao => {
 
-                if (!this.isEsconderAcaoDefender) {
+                if (this.mostrarAcaoDefesa) {
                     return acao.is_acao_defesa
                 }
 
                 return acao.is_acao_defesa && acao.id_acao !== 6
+            });
+        },
+
+        getAcoesRespostaJogada() {
+            return acoesPossiveis.filter(acao => {
+                return acao.id_acao == 9 || acao.id_acao == 7
             });
         }
     },
@@ -155,17 +205,27 @@ export default {
         },
 
         ataqueRecebido(objAtaqueRecebido) {
-            console.log(objAtaqueRecebido);
-            this.titleDefesa = objAtaqueRecebido.title;
-            this.descricaoAcaoSofrida = objAtaqueRecebido.descricaoAcao;
+            this.tituloAcao = objAtaqueRecebido.title;
+            this.descricaoAcao = objAtaqueRecebido.descricaoAcao;
             this.idJogadorQueAtacou = objAtaqueRecebido.idJogadorQueAtacou;
             this.usernameQueAtacou = objAtaqueRecebido.usernameQueAtacou;
 
             //Esconde a ação de defender, ela só irá aparecer quando for uma defesa de ASSASSINAR
-            this.isEsconderAcaoDefender = objAtaqueRecebido.isEsconderAcaoDefender;
+            this.mostrarAcaoDefesa = objAtaqueRecebido.mostrarAcaoDefesa;
             this.mostrarModalAcaoDefesa = true;
             this.segundosJogar = 10;
             this.setTempoAcao();
+        },
+
+        aguardarRespostaJogada(objJogada) {
+            this.tituloAcao = objJogada.title;
+            this.descricaoAcao = objJogada.descricaoAcao;
+            this.mostrarModalAcaoAtaque = false;
+            this.mostrarModalJogadores = false;
+            this.mostrarModalResponderJogada = true;
+            this.segundosJogar = 5;
+            //Seta como ação padrão a número 9 - ACEITAR
+            this.setTempoAcao(9);
         }
     },
 
@@ -205,6 +265,7 @@ export default {
             this.mostrarModalAcaoAtaque = false;
             this.mostrarModalJogadores = false;
             this.mostrarModalAcaoDefesa = false;
+            this.mostrarModalResponderJogada = false;
 
             //Emit o evento para fora do componente.
             this.$emit('acaoEscolhida', {
@@ -223,13 +284,13 @@ export default {
             });
         },
 
-        setTempoAcao() {
+        setTempoAcao(id_acao_padrao = 1) {
             this.tempoAcao = setInterval(() => {
                 this.segundosJogar--;
 
                 //Se chegou em 0 segundos, executa a ação 1 (RENDA)
                 if (this.segundosJogar < 1) {
-                    this.idAcao = 1;
+                    this.idAcao = id_acao_padrao;
                     this.executarAcao();
                 }
             }, 1000);

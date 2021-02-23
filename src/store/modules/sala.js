@@ -26,7 +26,7 @@ export default {
             return state.arrSalas
         },
 
-        arrJogadoresSala(state) {
+        getArrJogadoresSala(state) {
             return state.arrJogadoresSala
         },
 

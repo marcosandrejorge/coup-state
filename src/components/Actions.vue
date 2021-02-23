@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <v-card-title>
-            <v-btn color="primary" @click="iniciarPartida()" v-if="isAdminSala && !isSalaIniciada" left>
+            <v-btn color="primary" @click="iniciarPartida()" v-if="isPodeIniciarSala" left>
                 Iniciar partida
             </v-btn>
             <v-btn color="secondary" @click="sairPartida()" right absolute>
@@ -52,7 +52,7 @@ export default {
 
     computed: {
 
-        ...mapGetters('sala', ['getObjSala']),
+        ...mapGetters('sala', ['getObjSala', 'getArrJogadoresSala']),
         ...mapGetters('user', ['getSocketId', 'getMoedasJogadorLogado']),
 
         isAdminSala(){
@@ -61,13 +61,18 @@ export default {
 
         isSalaIniciada() {
             return this.getObjSala.isSalaIniciada;
-        }
+        },
+
+        isPodeIniciarSala() {
+            return !this.isSalaIniciada && this.getArrJogadoresSala.length > 1 && this.isAdminSala;
+        },
+
     },
 
     methods: {
 
         iniciarPartida() {
-            if (this.isAdminSala) {
+            if (this.isPodeIniciarSala) {
                 this.$emit('iniciarPartida');
             }
         },

@@ -72,7 +72,7 @@
                         <v-col cols="12">
                             <h4>Golpe de estado</h4>
                             <p class="text-justify">
-                                Pegue 7 moedas e escolha um jogador que perderá uma carta.
+                                Pague 7 moedas e escolha um jogador que perderá uma carta.
                             </p>
                             <p class="text-justify">
                                 <i>Não pode ser bloqueado ou contestado.</i>
@@ -106,6 +106,9 @@
                             </p>
                             <p class="text-justify">
                                 Se contestar um matador e o mesmo estiver falando a verdade, você perde 2 cartas. 1 por ter contestado e o jogador está falando a verdade, outra pela ação do matador.
+                            </p>
+                            <p class="text-justify">
+                                Qualquer jogador que atingir 10 moedas, é obrigado a dar um golpe de estado ou assasinar na sua vez de jogar.
                             </p>
                         </v-col>
                     </v-row>

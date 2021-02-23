@@ -81,12 +81,12 @@ export default {
                     break
                 case 4:
                     arrAction = [
-                        'Assassina com 3 moedas'
+                        'Assassina pagando 3 moedas'
                     ]
                     break
                 case 5:
                     arrAction = [
-                        'Troca uma carta da mão',
+                        'Troca uma carta da mão ou',
                         'Vê uma carta do oponente'
                     ]
                     break

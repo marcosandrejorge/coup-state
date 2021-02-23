@@ -119,11 +119,11 @@ export default {
     }),
 
     computed: {
-        ...mapGetters('sala', ['arrJogadoresSala', 'getAcoesSala', 'getIsSalaIniciada', 'getMinhasCartas']),
+        ...mapGetters('sala', ['getArrJogadoresSala', 'getAcoesSala', 'getIsSalaIniciada', 'getMinhasCartas']),
         ...mapGetters('user', ['getSocketId', 'getUserName']),
 
         getJogadoresContra() {
-            return this.arrJogadoresSala.filter(jogador => {
+            return this.getArrJogadoresSala.filter(jogador => {
                 return jogador.idJogador != this.getSocketId
             })
         }
@@ -178,7 +178,7 @@ export default {
         },
 
         iniciarPartida() {
-            this.$socket.emit('iniciarPartida')
+            this.$socket.emit('iniciarPartida');
         },
 
         acaoRealizar(objAcao) {

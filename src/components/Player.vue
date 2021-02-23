@@ -8,7 +8,7 @@
         </v-card-title>
 
         <v-card-text class="text-center">
-            <v-btn outlined color="yellow">
+            <v-btn outlined color="yellow" class="mb-10">
                 <v-icon left>attach_money</v-icon> {{ player.qtdMoedas }}
             </v-btn>
 
